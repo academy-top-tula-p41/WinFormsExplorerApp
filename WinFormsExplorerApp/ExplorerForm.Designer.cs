@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExplorerForm));
             menuStripMain = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
@@ -35,7 +36,7 @@
             deleteToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem1 = new ToolStripSeparator();
             exitToolStripMenuItem = new ToolStripMenuItem();
-            toolStrip1 = new ToolStrip();
+            toolStrip = new ToolStrip();
             toolStripButtonNewFile = new ToolStripButton();
             toolStripButtonDeleteFile = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
@@ -43,14 +44,19 @@
             toolStripButtonSmallIcon = new ToolStripButton();
             toolStripButtonList = new ToolStripButton();
             toolStripButtonDetail = new ToolStripButton();
-            statusStrip1 = new StatusStrip();
+            statusStrip = new StatusStrip();
             toolStripStatusLabelInfo = new ToolStripStatusLabel();
             splitContainerExplorer = new SplitContainer();
             treeViewDirictories = new TreeView();
+            imageListIcons16 = new ImageList(components);
             listViewDirectories = new ListView();
+            columnHeaderName = new ColumnHeader();
+            columnHeaderSize = new ColumnHeader();
+            imageListIcons64 = new ImageList(components);
+            imageListIcons32 = new ImageList(components);
             menuStripMain.SuspendLayout();
-            toolStrip1.SuspendLayout();
-            statusStrip1.SuspendLayout();
+            toolStrip.SuspendLayout();
+            statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainerExplorer).BeginInit();
             splitContainerExplorer.Panel1.SuspendLayout();
             splitContainerExplorer.Panel2.SuspendLayout();
@@ -99,14 +105,14 @@
             exitToolStripMenuItem.Size = new Size(149, 22);
             exitToolStripMenuItem.Text = "Exit";
             // 
-            // toolStrip1
+            // toolStrip
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButtonNewFile, toolStripButtonDeleteFile, toolStripSeparator1, toolStripButtonViewLargeIcon, toolStripButtonSmallIcon, toolStripButtonList, toolStripButtonDetail });
-            toolStrip1.Location = new Point(0, 24);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(812, 25);
-            toolStrip1.TabIndex = 1;
-            toolStrip1.Text = "toolStrip1";
+            toolStrip.Items.AddRange(new ToolStripItem[] { toolStripButtonNewFile, toolStripButtonDeleteFile, toolStripSeparator1, toolStripButtonViewLargeIcon, toolStripButtonSmallIcon, toolStripButtonList, toolStripButtonDetail });
+            toolStrip.Location = new Point(0, 24);
+            toolStrip.Name = "toolStrip";
+            toolStrip.Size = new Size(812, 25);
+            toolStrip.TabIndex = 1;
+            toolStrip.Text = "toolStrip1";
             // 
             // toolStripButtonNewFile
             // 
@@ -136,6 +142,7 @@
             toolStripButtonViewLargeIcon.Name = "toolStripButtonViewLargeIcon";
             toolStripButtonViewLargeIcon.Size = new Size(82, 22);
             toolStripButtonViewLargeIcon.Text = "Large Icon";
+            toolStripButtonViewLargeIcon.Click += toolStripButtonViewLargeIcon_Click;
             // 
             // toolStripButtonSmallIcon
             // 
@@ -144,6 +151,7 @@
             toolStripButtonSmallIcon.Name = "toolStripButtonSmallIcon";
             toolStripButtonSmallIcon.Size = new Size(82, 22);
             toolStripButtonSmallIcon.Text = "Small Icon";
+            toolStripButtonSmallIcon.Click += toolStripButtonSmallIcon_Click;
             // 
             // toolStripButtonList
             // 
@@ -152,6 +160,7 @@
             toolStripButtonList.Name = "toolStripButtonList";
             toolStripButtonList.Size = new Size(45, 22);
             toolStripButtonList.Text = "List";
+            toolStripButtonList.Click += toolStripButtonList_Click;
             // 
             // toolStripButtonDetail
             // 
@@ -160,21 +169,21 @@
             toolStripButtonDetail.Name = "toolStripButtonDetail";
             toolStripButtonDetail.Size = new Size(57, 22);
             toolStripButtonDetail.Text = "Detail";
+            toolStripButtonDetail.Click += toolStripButtonDetail_Click;
             // 
-            // statusStrip1
+            // statusStrip
             // 
-            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabelInfo });
-            statusStrip1.Location = new Point(0, 518);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(812, 22);
-            statusStrip1.TabIndex = 2;
-            statusStrip1.Text = "statusStrip1";
+            statusStrip.Items.AddRange(new ToolStripItem[] { toolStripStatusLabelInfo });
+            statusStrip.Location = new Point(0, 518);
+            statusStrip.Name = "statusStrip";
+            statusStrip.Size = new Size(812, 22);
+            statusStrip.TabIndex = 2;
+            statusStrip.Text = "statusStrip1";
             // 
             // toolStripStatusLabelInfo
             // 
             toolStripStatusLabelInfo.Name = "toolStripStatusLabelInfo";
-            toolStripStatusLabelInfo.Size = new Size(118, 17);
-            toolStripStatusLabelInfo.Text = "toolStripStatusLabel1";
+            toolStripStatusLabelInfo.Size = new Size(0, 17);
             // 
             // splitContainerExplorer
             // 
@@ -197,19 +206,101 @@
             // treeViewDirictories
             // 
             treeViewDirictories.Dock = DockStyle.Fill;
+            treeViewDirictories.ImageIndex = 0;
+            treeViewDirictories.ImageList = imageListIcons16;
             treeViewDirictories.Location = new Point(0, 0);
             treeViewDirictories.Name = "treeViewDirictories";
+            treeViewDirictories.SelectedImageIndex = 0;
             treeViewDirictories.Size = new Size(268, 467);
             treeViewDirictories.TabIndex = 0;
+            treeViewDirictories.BeforeExpand += treeViewDirictories_BeforeExpand;
+            treeViewDirictories.BeforeSelect += treeViewDirictories_BeforeExpand;
+            // 
+            // imageListIcons16
+            // 
+            imageListIcons16.ColorDepth = ColorDepth.Depth32Bit;
+            imageListIcons16.ImageStream = (ImageListStreamer)resources.GetObject("imageListIcons16.ImageStream");
+            imageListIcons16.TransparentColor = Color.Transparent;
+            imageListIcons16.Images.SetKeyName(0, "FOLDER.png");
+            imageListIcons16.Images.SetKeyName(1, "ANY.png");
+            imageListIcons16.Images.SetKeyName(2, "CPP.png");
+            imageListIcons16.Images.SetKeyName(3, "CS.png");
+            imageListIcons16.Images.SetKeyName(4, "CSS.png");
+            imageListIcons16.Images.SetKeyName(5, "EXCEL.png");
+            imageListIcons16.Images.SetKeyName(6, "HTML.png");
+            imageListIcons16.Images.SetKeyName(7, "JPG.png");
+            imageListIcons16.Images.SetKeyName(8, "JS.png");
+            imageListIcons16.Images.SetKeyName(9, "PDF.png");
+            imageListIcons16.Images.SetKeyName(10, "PNG.png");
+            imageListIcons16.Images.SetKeyName(11, "POWER POINT.png");
+            imageListIcons16.Images.SetKeyName(12, "TXT.png");
+            imageListIcons16.Images.SetKeyName(13, "WORD.png");
             // 
             // listViewDirectories
             // 
+            listViewDirectories.Columns.AddRange(new ColumnHeader[] { columnHeaderName, columnHeaderSize });
             listViewDirectories.Dock = DockStyle.Fill;
+            listViewDirectories.LargeImageList = imageListIcons64;
             listViewDirectories.Location = new Point(0, 0);
             listViewDirectories.Name = "listViewDirectories";
             listViewDirectories.Size = new Size(536, 467);
+            listViewDirectories.SmallImageList = imageListIcons16;
+            listViewDirectories.StateImageList = imageListIcons16;
             listViewDirectories.TabIndex = 0;
             listViewDirectories.UseCompatibleStateImageBehavior = false;
+            listViewDirectories.View = View.List;
+            listViewDirectories.SelectedIndexChanged += listViewDirectories_SelectedIndexChanged;
+            listViewDirectories.DoubleClick += listViewDirectories_DoubleClick;
+            // 
+            // columnHeaderName
+            // 
+            columnHeaderName.Text = "Name";
+            columnHeaderName.Width = 200;
+            // 
+            // columnHeaderSize
+            // 
+            columnHeaderSize.Text = "Size";
+            columnHeaderSize.Width = 160;
+            // 
+            // imageListIcons64
+            // 
+            imageListIcons64.ColorDepth = ColorDepth.Depth32Bit;
+            imageListIcons64.ImageStream = (ImageListStreamer)resources.GetObject("imageListIcons64.ImageStream");
+            imageListIcons64.TransparentColor = Color.Transparent;
+            imageListIcons64.Images.SetKeyName(0, "FOLDER.png");
+            imageListIcons64.Images.SetKeyName(1, "ANY.png");
+            imageListIcons64.Images.SetKeyName(2, "CPP.png");
+            imageListIcons64.Images.SetKeyName(3, "CS.png");
+            imageListIcons64.Images.SetKeyName(4, "CSS.png");
+            imageListIcons64.Images.SetKeyName(5, "EXCEL.png");
+            imageListIcons64.Images.SetKeyName(6, "HTML.png");
+            imageListIcons64.Images.SetKeyName(7, "JPG.png");
+            imageListIcons64.Images.SetKeyName(8, "JS.png");
+            imageListIcons64.Images.SetKeyName(9, "PDF.png");
+            imageListIcons64.Images.SetKeyName(10, "PNG.png");
+            imageListIcons64.Images.SetKeyName(11, "POWER POINT.png");
+            imageListIcons64.Images.SetKeyName(12, "TXT.png");
+            imageListIcons64.Images.SetKeyName(13, "WORD.png");
+            // 
+            // imageListIcons32
+            // 
+            imageListIcons32.ColorDepth = ColorDepth.Depth32Bit;
+            imageListIcons32.ImageStream = (ImageListStreamer)resources.GetObject("imageListIcons32.ImageStream");
+            imageListIcons32.TransparentColor = Color.Transparent;
+            imageListIcons32.Images.SetKeyName(0, "FOLDER.png");
+            imageListIcons32.Images.SetKeyName(1, "ANY.png");
+            imageListIcons32.Images.SetKeyName(2, "CPP.png");
+            imageListIcons32.Images.SetKeyName(3, "CS.png");
+            imageListIcons32.Images.SetKeyName(4, "CSS.png");
+            imageListIcons32.Images.SetKeyName(5, "EXCEL.png");
+            imageListIcons32.Images.SetKeyName(6, "HTML.png");
+            imageListIcons32.Images.SetKeyName(7, "JPG.png");
+            imageListIcons32.Images.SetKeyName(8, "JS.png");
+            imageListIcons32.Images.SetKeyName(9, "PDF.png");
+            imageListIcons32.Images.SetKeyName(10, "PNG.png");
+            imageListIcons32.Images.SetKeyName(11, "POWER POINT.png");
+            imageListIcons32.Images.SetKeyName(12, "TXT.png");
+            imageListIcons32.Images.SetKeyName(13, "WORD.png");
             // 
             // ExplorerForm
             // 
@@ -217,8 +308,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(812, 540);
             Controls.Add(splitContainerExplorer);
-            Controls.Add(statusStrip1);
-            Controls.Add(toolStrip1);
+            Controls.Add(statusStrip);
+            Controls.Add(toolStrip);
             Controls.Add(menuStripMain);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStripMain;
@@ -227,10 +318,10 @@
             Load += ExplorerForm_Load;
             menuStripMain.ResumeLayout(false);
             menuStripMain.PerformLayout();
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
-            statusStrip1.ResumeLayout(false);
-            statusStrip1.PerformLayout();
+            toolStrip.ResumeLayout(false);
+            toolStrip.PerformLayout();
+            statusStrip.ResumeLayout(false);
+            statusStrip.PerformLayout();
             splitContainerExplorer.Panel1.ResumeLayout(false);
             splitContainerExplorer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainerExplorer).EndInit();
@@ -247,7 +338,7 @@
         private ToolStripMenuItem deleteToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem1;
         private ToolStripMenuItem exitToolStripMenuItem;
-        private ToolStrip toolStrip1;
+        private ToolStrip toolStrip;
         private ToolStripButton toolStripButtonNewFile;
         private ToolStripButton toolStripButtonDeleteFile;
         private ToolStripSeparator toolStripSeparator1;
@@ -255,10 +346,15 @@
         private ToolStripButton toolStripButtonSmallIcon;
         private ToolStripButton toolStripButtonList;
         private ToolStripButton toolStripButtonDetail;
-        private StatusStrip statusStrip1;
+        private StatusStrip statusStrip;
         private ToolStripStatusLabel toolStripStatusLabelInfo;
         private SplitContainer splitContainerExplorer;
         private TreeView treeViewDirictories;
         private ListView listViewDirectories;
+        private ImageList imageListIcons16;
+        private ImageList imageListIcons64;
+        private ImageList imageListIcons32;
+        private ColumnHeader columnHeaderName;
+        private ColumnHeader columnHeaderSize;
     }
 }
