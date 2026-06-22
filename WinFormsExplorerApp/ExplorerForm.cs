@@ -15,6 +15,7 @@ namespace WinFormsExplorerApp
 
             ToolStripMenuItem viewLargeIconToolStripMenuItem = new ToolStripMenuItem("Large Icon");
             viewLargeIconToolStripMenuItem.ShortcutKeys = Keys.Alt | Keys.B;
+            viewLargeIconToolStripMenuItem.Click += toolStripButtonViewLargeIcon_Click;
             viewToolStripMenuItem.DropDownItems.Add(viewLargeIconToolStripMenuItem);
 
             ToolStripMenuItem viewSmallIconToolStripMenuItem = new ToolStripMenuItem("Small Icon");
